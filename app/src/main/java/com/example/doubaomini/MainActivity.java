@@ -1,5 +1,6 @@
 package com.example.doubaomini;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.example.doubaomini.fragment.BaseHomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,5 +22,14 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container, new BaseHomeFragment())
+                    .commit();
+        }
+
     }
+
 }
