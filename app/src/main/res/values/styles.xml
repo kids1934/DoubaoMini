@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="common_dialog_anim">
+        <item name="android:windowEnterAnimation">@anim/common_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/common_dialog_exixt</item>
+    </style>
+
+</resources>

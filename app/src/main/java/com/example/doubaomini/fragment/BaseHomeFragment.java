@@ -1,5 +1,7 @@
 package com.example.doubaomini.fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,13 +18,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.doubaomini.R;
+import com.example.doubaomini.activity.MainActivity;
 import com.example.doubaomini.adapter.ChatAdapter;
 import com.example.doubaomini.bean.ChatMessage;
 import com.example.doubaomini.databinding.FragmentBaseHomeBinding;
+import com.example.doubaomini.view.LoginDialog;
 import com.example.doubaomini.viewmodel.BaseHomeVM;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 对话页面基础Fragment
@@ -48,7 +53,8 @@ public class BaseHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        baseHomeVM = new ViewModelProvider(requireActivity()).get(BaseHomeVM.class);
+        MainActivity activity = (MainActivity)requireActivity();
+        baseHomeVM = activity.baseHomeVM;
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setStackFromEnd(true);
         fragmentBaseHomeBinding.chatView.setLayoutManager(layoutManager);
@@ -74,6 +80,14 @@ public class BaseHomeFragment extends Fragment {
             newMessages.add(new ChatMessage(ChatMessage.TYPE_RIGHT, mes));
             baseHomeVM.message.setValue(newMessages);
             fragmentBaseHomeBinding.etMessage.setText("");
+        });
+
+        fragmentBaseHomeBinding.login.setOnClickListener(v -> {
+            new LoginDialog.Builder(requireActivity(), true).create().show();
+        });
+
+        fragmentBaseHomeBinding.register.setOnClickListener(v -> {
+            new LoginDialog.Builder(requireActivity(), false).create().show();
         });
     }
 

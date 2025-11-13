@@ -1,4 +1,4 @@
-package com.example.doubaomini;
+package com.example.doubaomini.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -8,9 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.doubaomini.R;
 import com.example.doubaomini.fragment.BaseHomeFragment;
+import com.example.doubaomini.viewmodel.BaseHomeVM;
 
 public class MainActivity extends AppCompatActivity {
+
+    public BaseHomeVM baseHomeVM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        baseHomeVM = new ViewModelProvider(this).get(BaseHomeVM.class);
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
