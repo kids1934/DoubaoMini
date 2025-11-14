@@ -1,27 +1,33 @@
 package com.example.doubaomini.fragment;
 
-import android.app.Activity;
-import android.app.AlertDialog;
+import static android.view.View.MeasureSpec.AT_MOST;
+import static android.view.View.MeasureSpec.EXACTLY;
+
+import android.app.Dialog;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.Window;
 
 import com.example.doubaomini.R;
 import com.example.doubaomini.activity.MainActivity;
 import com.example.doubaomini.adapter.ChatAdapter;
 import com.example.doubaomini.bean.ChatMessage;
 import com.example.doubaomini.databinding.FragmentBaseHomeBinding;
+import com.example.doubaomini.utils.ContextUtil;
+import com.example.doubaomini.utils.LogUtil;
+import com.example.doubaomini.utils.MyToastUtil;
 import com.example.doubaomini.view.LoginDialog;
 import com.example.doubaomini.viewmodel.BaseHomeVM;
 
@@ -41,6 +47,8 @@ public class BaseHomeFragment extends Fragment {
     private BaseHomeVM baseHomeVM;
 
     private ChatAdapter chatAdapter;
+
+    private final String TAG = "BaseHomeFragment";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -68,7 +76,7 @@ public class BaseHomeFragment extends Fragment {
         fragmentBaseHomeBinding.btnSend.setOnClickListener(v -> {
             if(fragmentBaseHomeBinding.etMessage.getText() == null
                     || fragmentBaseHomeBinding.etMessage.getText().toString().isEmpty()){
-                Toast.makeText(getActivity(), "输入内容不可以为空", Toast.LENGTH_SHORT).show();
+                MyToastUtil.show(requireActivity(), "输入内容不可以为空", null);
                 return;
             }
             String mes = fragmentBaseHomeBinding.etMessage.getText().toString();

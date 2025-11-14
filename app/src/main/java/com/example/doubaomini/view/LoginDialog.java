@@ -26,14 +26,6 @@ public class LoginDialog extends Dialog {
     public LoginDialog(@NonNull Context context) {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (!(context instanceof Activity)) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
-            } else {
-                getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-            }
-        }
-        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.windowAnimations = R.style.common_dialog_anim;
         getWindow().setAttributes(layoutParams);
@@ -53,7 +45,7 @@ public class LoginDialog extends Dialog {
         private final UserLogin userLogin;
         private final UserRegister userRegister;
 
-        public Builder(@NonNull Context context, Boolean isLogin) {
+        public Builder(@NonNull Activity context, Boolean isLogin) {
             this.mContext = context;
             this.isLogin = isLogin;
             userLogin = new UserLogin();

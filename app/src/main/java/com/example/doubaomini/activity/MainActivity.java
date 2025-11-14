@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.doubaomini.R;
 import com.example.doubaomini.fragment.BaseHomeFragment;
+import com.example.doubaomini.view.LoginDialog;
 import com.example.doubaomini.viewmodel.BaseHomeVM;
 
 public class MainActivity extends AppCompatActivity {
